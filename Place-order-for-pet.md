@@ -49,6 +49,7 @@ None
 
 ### Curl
   ```
+  `{
   curl -X 'POST' \
   'https://petstore3.swagger.io/api/v3/store/order' \
   -H 'accept: application/json' \
@@ -82,3 +83,40 @@ None
 ```
 
 ## 3. Confirm the order status with the store
+Use the returned **id** with ``orderId`` to return the order information and confirm the order status.
+> **GET /store/order/{orderId}**  
+* **Summary:** Find purchase order by ID  
+* **Description:** For valid response, try integers <= 5 or > 10. Outside of that range generates exceptions.
+
+## Parameters
+| **Name** | **Type** | **Description** |
+| ------------- |:-------------:|:-------------:|
+| **orderId** | integer($int64) | ID of order to be fetched |
+
+### Curl
+```
+{
+  curl -X 'GET' \
+  'https://petstore3.swagger.io/api/v3/store/order/10' \
+  -H 'accept: application/xml'
+}
+```
+
+### Responses
+| **Code** | **Description** |
+| ------------- |:-------------:|
+| 200 | successful operation |
+| 400 | invalid ID supplied |
+| 405 | Order not found |
+
+### Example
+```
+{
+  "id": 10,
+  "petId": 198772,
+  "quantity": 7,
+  "shipDate": "2021-09-27T22:06:44.239Z",
+  "status": "approved",
+  "complete": true
+}
+```
